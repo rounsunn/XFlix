@@ -9,5 +9,5 @@
         "reporterEnabled": "spec, mocha-junit-reporter"
     },
     "pageLoadTimeout": 120000,
-    "retries": 1
+    "retries": 2
 }
