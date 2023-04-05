@@ -1,0 +1,22 @@
+.video-grid {
+    background: #181818;
+    padding: 22px 10% 0px 10% !important;
+}
+
+.video-tile {
+    background: #181818 !important;
+}
+
+.video-title {
+    font-family: "Roboto", sans-serif !important;
+    font-weight: bold !important;
+    font-size: 14px !important;
+    color: #FFFFFF !important;
+}
+
+.video-upload-date {
+    font-family: "Roboto", sans-serif !important;
+    font-style: normal !important;
+    font-size: 14px !important;
+    color: #D1D5DA !important;
+}

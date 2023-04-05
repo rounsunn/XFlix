@@ -1,0 +1,20 @@
+.genre-panel {
+    background: #212121;
+}
+
+.MuiChip-root {
+    font-family: Roboto;
+    font-style: normal;
+    font-weight: 400;
+    font-size: 14px;
+    line-height: 20px;
+    text-transform: none;
+    background-color: transparent !important;
+    color: rgba(255, 255, 255, 0.87) !important;
+}
+/* MuiChip-root */
+
+.MuiChip-colorPrimary {
+    color: #586069 !important;
+    background-color: #ffffff !important;
+}

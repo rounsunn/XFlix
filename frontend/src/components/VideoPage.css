@@ -1,0 +1,25 @@
+.video-frame {
+    background: #181818;
+    padding: 22px 10% 0px 10% !important;
+}
+
+.videoData-title {
+    font-family: Roboto, sans-serif;
+    font-style: bold;
+    font-size: 24px;
+    color: #FFFFFF;
+}
+
+.videoData-data {
+    font-family: Roboto, sans-serif;
+    font-size: 14px;
+    color: #C2C2C2;
+}
+
+.circle {
+    width: 6px;
+    height: 6px;
+    border-radius: 50%;
+    background-color: #C2C2C2;
+}
+  
