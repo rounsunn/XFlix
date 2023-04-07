@@ -4,6 +4,7 @@ import Header from "./Header";
 import GenrePanel from "./GenrePanel";
 import DashboardVideoGrid from "./DashboardVideoGrid";
 import Footer from "./Footer";
+import { config } from "../App";
 import "./HomePage.css";
 
 const HomePage = ( {videosData} ) => {
@@ -11,24 +12,31 @@ const HomePage = ( {videosData} ) => {
 
 
   const fetchVideos = async (genre, contentRating, sortBy) => {
-    const url = "http://<ip>:<port>/v1/videos";
+    const url = config.endpoint;
+    console.log("fetch called   :", genre, contentRating, sortBy)
     const params = {};
-    if (genre !== "All") {
-      params.genres = genre;
+    if (genre && genre.length > 0) {
+      params.genres = genre.join(",");
     }
     if (contentRating) {
-      params.contentRating = contentRating;
+      params.contentRating = encodeURI(contentRating);
     }
     if (sortBy) {
       params.sortBy = sortBy;
     }
-    const response = await axios.get(url, { params });
-    setVideos(response.data);
+    try {
+      const response = await axios.get(url, { params });
+      console.log("videos after genre panel changes:", response.data);
+      setVideos(response.data.videos);
+    } catch (error) {
+      console.error("Error fetching videos:", error);
+    }
   };
+  
 
   const onSearch = async (text) => {
     // Implement debounced search to fetc mvoies
-    console.log("search function called after debounced");
+    console.log("search function called after debounced", text);
     const serachedVideo = videos;
     setVideos(serachedVideo);
   };
@@ -37,7 +45,7 @@ const HomePage = ( {videosData} ) => {
     <div>
       <Header hasSearchAndUploadButton={true} onSearch={onSearch}/>
       <GenrePanel fetchVideos={fetchVideos} />
-      <DashboardVideoGrid videos={videosData} />
+      {videos && <DashboardVideoGrid videos={videos} /> }
       <Footer />
     </div>
   );

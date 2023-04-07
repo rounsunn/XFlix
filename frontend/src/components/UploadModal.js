@@ -3,6 +3,7 @@ import axios from 'axios';
 import { Button, Modal, Form } from 'react-bootstrap';
 import { makeStyles } from '@material-ui/core/styles';
 import TextField from '@material-ui/core/TextField';
+import { config } from '../App';
 import "./UploadModal.css"
 
 const useStyles = makeStyles((theme) => ({
@@ -42,12 +43,14 @@ const VideoUploadModal = ({ open, onClose }) => {
     try {
       const youtubeId = videoLink.split('/').pop();
       const embedLink = `youtube.com/embed/${youtubeId}`;
-      await axios.post('/v1/videos', {
+      const date = new Date(releaseDate);
+      const formattedDate = `${date.getDate()} ${date.toLocaleString('default', { month: 'short' })} ${date.getFullYear()}`;
+      await axios.post(`${config.endpoint}`, {
         videoLink: embedLink,
         title,
         genre,
         contentRating,
-        releaseDate,
+        releaseDate: formattedDate,
         previewImage,
       });
       onClose();
@@ -57,9 +60,10 @@ const VideoUploadModal = ({ open, onClose }) => {
   };
 
   return (
-    <Modal class="video-upload-modal" show={open} onHide={onClose} centered>
-      <Modal.Header closeButton>
-        <Modal.Title>Upload a Video</Modal.Title>
+    <Modal className="video-upload-modal" show={open} onHide={onClose} centered>
+      <Modal.Header className="p-3" style={{ backgroundColor: '#121212', color: '#FFFFFF' }}>
+        <Modal.Title class="modal-title">Upload a Video</Modal.Title>
+        <button class="closeIcon" onClick={onClose}>×</button>
       </Modal.Header>
       <Modal.Body style={{ backgroundColor: '#121212', color: '#FFFFFF' }}>
         <Form className={classes.root}>
@@ -70,6 +74,8 @@ const VideoUploadModal = ({ open, onClose }) => {
             onChange={(e) => setVideoLink(e.target.value)}
             fullWidth
             margin="normal"
+            InputLabelProps={{ style: { color: "#FFFFFF" } }}
+            InputProps={{ style: { color: "#FFFFFF" } }}
           />
           <TextField
             label="Title"
@@ -78,6 +84,8 @@ const VideoUploadModal = ({ open, onClose }) => {
             onChange={(e) => setTitle(e.target.value)}
             fullWidth
             margin="normal"
+            InputLabelProps={{ style: { color: "#FFFFFF" } }}
+            InputProps={{ style: { color: "#FFFFFF" } }}
           />
           <TextField
             label="Genre"
@@ -86,6 +94,8 @@ const VideoUploadModal = ({ open, onClose }) => {
             onChange={(e) => setGenre(e.target.value)}
             fullWidth
             margin="normal"
+            InputLabelProps={{ style: { color: "#FFFFFF" } }}
+            InputProps={{ style: { color: "#FFFFFF" } }}
           />
           <TextField
             label="Content Rating"
@@ -94,6 +104,8 @@ const VideoUploadModal = ({ open, onClose }) => {
             onChange={(e) => setContentRating(e.target.value)}
             fullWidth
             margin="normal"
+            InputLabelProps={{ style: { color: "#FFFFFF" } }}
+            InputProps={{ style: { color: "#FFFFFF" } }}
           />
           <TextField
             label="Release Date"
@@ -102,6 +114,8 @@ const VideoUploadModal = ({ open, onClose }) => {
             onChange={(e) => setReleaseDate(e.target.value)}
             fullWidth
             margin="normal"
+            InputLabelProps={{ style: { color: "#FFFFFF" } }}
+            InputProps={{ style: { color: "#FFFFFF" } }}
           />
           <TextField
             label="Preview Image Link"
@@ -110,6 +124,8 @@ const VideoUploadModal = ({ open, onClose }) => {
             onChange={(e) => setPreviewImage(e.target.value)}
             fullWidth
             margin="normal"
+            InputLabelProps={{ style: { color: "#FFFFFF" } }}
+            InputProps={{ style: { color: "#FFFFFF" } }}
           />
         </Form>
       </Modal.Body>
@@ -119,14 +135,14 @@ const VideoUploadModal = ({ open, onClose }) => {
           className={classes.submitButton}
           onClick={handleSubmit}
         >
-          Submit
+          UPLOAD VIDEO
         </Button>
         <Button
           variant="contained"
           className={classes.cancelButton}
           onClick={onClose}
         >
-          Cancel
+          CANCEL
         </Button>
       </Modal.Footer>
     </Modal>

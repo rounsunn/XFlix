@@ -4,7 +4,8 @@
 
 .MuiInputBase-input::placeholder {
   color: #fff !important;
-  }
+}
+  
 
 /* button {
     margin: ${theme.spacing(1)};
@@ -19,4 +20,6 @@
   .leftIcon {
     margin-right: ${theme.spacing(1)};
   } */
+
+
   

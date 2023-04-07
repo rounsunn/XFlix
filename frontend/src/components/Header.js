@@ -1,4 +1,4 @@
-import { useState, useEffect } from "react";
+import { useState, useCallback } from "react";
 import Box from "@mui/material/Box";
 import { Link } from 'react-router-dom';
 import TextField from "@material-ui/core/TextField";
@@ -9,6 +9,7 @@ import Button from '@material-ui/core/Button';
 import PublishIcon from '@material-ui/icons/Publish';
 import xflixLogo from "../assets/xflix_logo.svg";
 import VideoUploadModal from "./UploadModal";
+import { debounce } from "lodash";
 import "./Header.css";
 
 const useStyles = makeStyles((theme) => ({
@@ -23,6 +24,7 @@ const useStyles = makeStyles((theme) => ({
       "&.Mui-focused .MuiOutlinedInput-notchedOutline": {
         borderColor: theme.palette.primary.main,
       },
+      
     },
     input: {
       color: theme.palette.text.primary,
@@ -54,16 +56,17 @@ function Header({ hasSearchAndUploadButton = false, onSearch }) {
     const classes = useStyles();
     const [searchValue, setSearchValue] = useState('');
   
-    useEffect(() => {
-      const debounceTimeout = setTimeout(() => {
-        onSearch(searchValue);
-      }, 500);
-  
-      return () => clearTimeout(debounceTimeout);
-    }, [searchValue, onSearch]);
+    const debounceOnSearch = useCallback(
+      debounce((value) => {
+        onSearch(value);
+      }, 500),
+      [onSearch]
+    );
   
     const handleSearchChange = (event) => {
-      setSearchValue(event.target.value);
+      const value = event.target.value;
+      setSearchValue(value);
+      debounceOnSearch(value);
     };
   
     return (
@@ -79,6 +82,7 @@ function Header({ hasSearchAndUploadButton = false, onSearch }) {
                 <SearchIcon />
               </InputAdornment>
             ),
+            style: { color: '#ffffff' }
           }}
         />
       </Box>

@@ -7,6 +7,7 @@ import { formatDistanceStrict } from 'date-fns';
 import Header from "./Header";
 import DashboardVideoGrid from "./DashboardVideoGrid";
 import Footer from "./Footer";
+import { config } from "../App";
 import "./VideoPage.css"
 
 
@@ -15,7 +16,7 @@ const VideoFrame = ({ videoData }) => {
   const [voteStatus, setVoteStatus] = useState("");
 
   const handleVote = async (vote) => {
-    const response = await fetch(`/v1/videos/${videoData.id}/votes`, {
+    const response = await fetch(`${config.endpoint}/${videoData._id}/votes`, {
       method: "PATCH",
       headers: {
         "Content-Type": "application/json",
@@ -34,7 +35,7 @@ const VideoFrame = ({ videoData }) => {
   };
 
   const handleViewCount = async () => {
-    const response = await fetch(`/v1/videos/${videoData.id}/views`, {
+    const response = await fetch(`${config.endpoint}/${videoData._id}/views`, {
       method: "PATCH",
       headers: {
         "Content-Type": "application/json",

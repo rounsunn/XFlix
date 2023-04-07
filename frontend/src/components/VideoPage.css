@@ -3,14 +3,14 @@
     padding: 22px 10% 0px 10% !important;
 }
 
-.videoData-title {
+.video-title {
     font-family: Roboto, sans-serif;
     font-style: bold;
     font-size: 24px;
     color: #FFFFFF;
 }
 
-.videoData-data {
+.video-data {
     font-family: Roboto, sans-serif;
     font-size: 14px;
     color: #C2C2C2;
