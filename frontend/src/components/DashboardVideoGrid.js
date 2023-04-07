@@ -34,7 +34,7 @@ const DashboardVideoGrid = ({ videos }) => {
     <Grid container className="video-grid">
       {videos.map((video) => (
         <Grid className="p-1" item xs={12} sm={6} md={4} lg={3} key={video.id}>
-          <Link to={`/stream-video/${video.id}`}>
+          <Link to={`/video/${video.id}`}>
             <VideoTile video={video} />
           </Link>
         </Grid>

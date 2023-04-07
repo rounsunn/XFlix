@@ -2,6 +2,10 @@
     background: #212121;
 }
 
+.MuiInputBase-input::placeholder {
+  color: #fff !important;
+  }
+
 /* button {
     margin: ${theme.spacing(1)};
     background-color: #2196f3;
